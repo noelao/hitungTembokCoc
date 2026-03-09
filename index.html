@@ -23,18 +23,35 @@
             justify-content: center;
             .tembok {
                 display: flex;
-                align-items: center;
+                justify-content: space-between;
+                .kiri {
+                    display: flex;
+                    align-items: center;
+                }
+                .kanan {
+                    display: flex;
+                    align-items: center;
+                }
+                .gambar {
+                    width: 100px;
+                    height: 100px;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
             }
-            .gambar {
-                width: 100px;
-                height: 100px;
-                overflow: hidden;
+            .tampilkanHarga {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                img {
-                    height: 100%;
-                    object-fit: cover;
+                gap: 10px;
+                .keterangan {
+                    display: flex;
+                    flex-direction: column;
                 }
             }
         }
@@ -65,7 +82,7 @@
         tombol.addEventListener('click', tampilkanData);
         tampilkanData();
         
-        function tampilkanData(){
+        async function tampilkanData(){
             const inputanDataJson = document.querySelector('.inputan');
             const dataJson = JSON.parse(inputanDataJson.value);
 
@@ -75,26 +92,134 @@
             console.log(dataJson.buildings);
 
             let townhall
+            let wallMax
 
             const dataHtml = dataJson.buildings.map(element => {
                 if(element.data == 1000001){
                     townhall = element.lvl;
+                    if(townhall > 10){
+                        wallMax = townhall + 1;
+                    } else {
+                        wallMax = townhall;
+                    }
                 }
                 if(element.data == 1000010){
                     console.log(element.lvl +" : "+ element.cnt);
                     return `
                     <div class="tembok">
-                        <div class="gambar">
-                            <img src="./gambarTembok/gambar_hd_${element.lvl}.jpg" alt="imgWall">
+                        <div class="kiri">
+                            <div class="gambar">
+                                <img src="./gambarTembok/gambar_hd_${element.lvl}.jpg" alt="imgWall">
+                            </div>
+                            <h1>: ${element.cnt}</h1>
                         </div>
-                        <h1>: ${element.cnt}</h1>
+                        <div class="kanan">
+                            <h1>${wallMax - element.lvl} </h1>
+                            <div class="gambar">
+                                <img src="./icon/upgrade.webp" alt="upgrade">
+                            </div>
+                            <h1>${element.cnt} : </h1>
+                            <div class="gambar">
+                                <img src="./gambarTembok/gambar_hd_${wallMax}.jpg" alt="imgWall">
+                            </div>
+                        </div>
                     </div>
                     `
                 }
             }).join(" ");
+            const dataTembokSekarang = dataJson.buildings
+                .filter(element => element.data == 1000010) // Hanya ambil ID tembok
+                .map(element => {
+                    return { "lvl": element.lvl, "cnt": element.cnt };
+                });
 
-            const tampilkanDataTembok = document.querySelector('.tampilkanDataTembok');
-            tampilkanDataTembok.innerHTML = dataHtml;
+            // 2. Ubah Array Object tersebut menjadi String JSON
+            const jsonDataTembokSekarang = JSON.stringify(dataTembokSekarang, null, 2);
+
+
+            let dataHarga
+            try {
+                const response = await fetch("./harga.json");
+                if(!response.ok){
+                    throw new Error("error mengambil harga.json");
+                }
+                dataHarga = await response.json();
+            } catch (error) {
+                console.log(error);
+            } finally {
+
+
+                const convertTembok = `
+                <div class="tampilkanHarga">
+                    <img src="./gambarTownhall/gambar_hd_${townhall}.jpg" alt="townhall">
+                    ${hitungHarga(dataHarga, wallMax, dataTembokSekarang)}
+                </div>
+                `
+
+    
+                const tampilkanDataTembok = document.querySelector('.tampilkanDataTembok');
+    
+                tampilkanDataTembok.innerHTML = dataHtml + convertTembok;
+            }
+
+        }
+        function hitungHarga(daftarHarga, wallMax, sesuatu){
+            let totalHarga = 0;
+            let keterangan = "";
+            function tambahkanKeterangan(inian){
+                keterangan += `<span>${inian}</span>`;
+            }
+
+            sesuatu.forEach((ini, i) => {
+                tambahkanKeterangan("memulai menghitiung tembok "+ (parseInt(i)+1));
+                console.log("memulai menghitiung tembok "+ i);
+                tambahkanKeterangan("jumlah " + ini.cnt);
+                console.log("jumlah" + ini.cnt);
+                tambahkanKeterangan("lvl " + ini.lvl + " ke lvl " + wallMax);
+                console.log("lvl " + ini.lvl + " ke lvl " + wallMax);
+
+                let selisihKeWallMax = wallMax-ini.lvl;
+                if(selisihKeWallMax > 1){
+                    tambahkanKeterangan("butuh penyesuaian lvl sebelum lvl max");
+                    console.log("butuh penyesuaian lvl sebelum lvl max");
+                    for(let j = 1;selisihKeWallMax > 1; j++,selisihKeWallMax--){
+                        let lvlAwal = parseInt(ini.lvl);
+                        tambahkanKeterangan("menjadikan lvl "+ (lvlAwal + j));
+                        console.log("menjadikan lvl "+ (lvlAwal + j));
+
+                        let hasilHarga = daftarHarga.find(item => item.lvl === lvlAwal + j);
+
+                        tambahkanKeterangan("untuk upgrade ke lvl "+ (lvlAwal+j) + " dengan harga / wall = " + hasilHarga.harga);
+                        console.log("untuk upgrade ke lvl "+ lvlAwal+j, " dengan harga / wall = " + hasilHarga.harga);
+                        tambahkanKeterangan("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                        console.log("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                        
+                        totalHarga += hasilHarga.harga * ini.cnt;
+                    }
+                }
+                tambahkanKeterangan("menghitung harga ke lvl max yaitu " + wallMax);
+                console.log("menghitung harga ke lvl max");
+                let hasilHarga = daftarHarga.find(item => item.lvl === wallMax);
+                tambahkanKeterangan("untuk upgrade ke lvl "+ wallMax + " dengan harga / wall = " + hasilHarga.harga);
+                console.log("untuk upgrade ke lvl "+ wallMax + " dengan harga / wall = " + hasilHarga.harga);
+                
+                tambahkanKeterangan("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                console.log("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                totalHarga += hasilHarga.harga * ini.cnt;
+
+                console.log("")
+                tambahkanKeterangan("<br>");
+
+            });
+
+            return `
+                <div class="tampilkanHarga">
+                    <div class="keterangan">
+                        ${keterangan}
+                    </div>
+                    <h1>Rp ${totalHarga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</h1>
+                </div>
+            `
         }
     </script>
 </body>
