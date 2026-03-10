@@ -47,11 +47,20 @@
             }
             .tampilkanHarga {
                 display: flex;
-                align-items: center;
+                flex-direction: column;
+                width: 100%;
                 gap: 10px;
+                img.gambarTownhall {
+                    width: 100%;
+                    max-width: 320px;
+                }
                 .keterangan {
                     display: flex;
                     flex-direction: column;
+                    img {
+                        height: 100px;
+                        width: auto;
+                    }
                 }
             }
         }
@@ -151,7 +160,7 @@
 
                 const convertTembok = `
                 <div class="tampilkanHarga">
-                    <img src="./gambarTownhall/gambar_hd_${townhall}.jpg" alt="townhall">
+                    <img class="gambarTownhall" src="./gambarTownhall/gambar_hd_${townhall}.jpg" alt="townhall">
                     ${hitungHarga(dataHarga, wallMax, dataTembokSekarang)}
                 </div>
                 `
@@ -166,12 +175,18 @@
         function hitungHarga(daftarHarga, wallMax, sesuatu){
             let totalHarga = 0;
             let keterangan = "";
-            function tambahkanKeterangan(inian){
-                keterangan += `<span>${inian}</span>`;
+            function tambahkanKeterangan(inian, mode = 0){
+                if(mode == 0){
+                    keterangan += `<span>${inian}</span>`;
+                } else if (mode == 1){
+                    keterangan += `<div>${inian}</div>`;
+                }
+
             }
 
             sesuatu.forEach((ini, i) => {
-                tambahkanKeterangan("memulai menghitiung tembok "+ (parseInt(i)+1));
+                
+                tambahkanKeterangan("memulai menghitung tembok "+ (parseInt(i)+1));
                 console.log("memulai menghitiung tembok "+ i);
                 tambahkanKeterangan("jumlah " + ini.cnt);
                 console.log("jumlah" + ini.cnt);
@@ -179,45 +194,66 @@
                 console.log("lvl " + ini.lvl + " ke lvl " + wallMax);
 
                 let selisihKeWallMax = wallMax-ini.lvl;
-                if(selisihKeWallMax > 1){
-                    tambahkanKeterangan("butuh penyesuaian lvl sebelum lvl max");
-                    console.log("butuh penyesuaian lvl sebelum lvl max");
-                    for(let j = 1;selisihKeWallMax > 1; j++,selisihKeWallMax--){
-                        let lvlAwal = parseInt(ini.lvl);
-                        tambahkanKeterangan("menjadikan lvl "+ (lvlAwal + j));
-                        console.log("menjadikan lvl "+ (lvlAwal + j));
 
-                        let hasilHarga = daftarHarga.find(item => item.lvl === lvlAwal + j);
+                if(selisihKeWallMax == 0){
+                    tambahkanKeterangan("sudah max");
+                } else {
+                    let keteranganDenganGambar = "";
 
-                        tambahkanKeterangan("untuk upgrade ke lvl "+ (lvlAwal+j) + " dengan harga / wall = " + hasilHarga.harga);
-                        console.log("untuk upgrade ke lvl "+ lvlAwal+j, " dengan harga / wall = " + hasilHarga.harga);
-                        tambahkanKeterangan("dengan total harga "+ hasilHarga.harga * ini.cnt);
-                        console.log("dengan total harga "+ hasilHarga.harga * ini.cnt);
-                        
-                        totalHarga += hasilHarga.harga * ini.cnt;
+                    if(selisihKeWallMax > 1){
+                        tambahkanKeterangan("butuh penyesuaian lvl sebelum lvl max");
+                        console.log("butuh penyesuaian lvl sebelum lvl max");
+                        for(let j = 1;selisihKeWallMax > 1; j++,selisihKeWallMax--){
+                            let lvlAwal = parseInt(ini.lvl);
+                            tambahkanKeterangan("menjadikan lvl "+ (lvlAwal + j));
+                            console.log("menjadikan lvl "+ (lvlAwal + j));
+    
+                            let hasilHarga = daftarHarga.find(item => item.lvl === lvlAwal + j);
+    
+                            tambahkanKeterangan("untuk upgrade ke lvl "+ (lvlAwal+j) + " dengan harga / wall = " + hasilHarga.harga);
+                            console.log("untuk upgrade ke lvl "+ lvlAwal+j, " dengan harga / wall = " + hasilHarga.harga);
+                            tambahkanKeterangan("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                            console.log("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                            
+                            keteranganDenganGambar += `
+                                <img class="gambarTownhall" src="./gambarTembok/gambar_hd_${wallMax-selisihKeWallMax}.jpg" alt="townhall">
+                                <img class="gambarTownhall" src="./icon/upgrade.webp" alt="townhall">
+                            `
+
+                            totalHarga += hasilHarga.harga * ini.cnt;
+                        }
                     }
-                }
-                tambahkanKeterangan("menghitung harga ke lvl max yaitu " + wallMax);
-                console.log("menghitung harga ke lvl max");
-                let hasilHarga = daftarHarga.find(item => item.lvl === wallMax);
-                tambahkanKeterangan("untuk upgrade ke lvl "+ wallMax + " dengan harga / wall = " + hasilHarga.harga);
-                console.log("untuk upgrade ke lvl "+ wallMax + " dengan harga / wall = " + hasilHarga.harga);
-                
-                tambahkanKeterangan("dengan total harga "+ hasilHarga.harga * ini.cnt);
-                console.log("dengan total harga "+ hasilHarga.harga * ini.cnt);
-                totalHarga += hasilHarga.harga * ini.cnt;
+                    tambahkanKeterangan("menghitung harga ke lvl max yaitu " + wallMax);
+                    console.log("menghitung harga ke lvl max");
+                    let hasilHarga = daftarHarga.find(item => item.lvl === wallMax);
+                    tambahkanKeterangan("untuk upgrade ke lvl "+ wallMax + " dengan harga / wall = " + hasilHarga.harga);
+                    console.log("untuk upgrade ke lvl "+ wallMax + " dengan harga / wall = " + hasilHarga.harga);
+                    
+                    keteranganDenganGambar += `
+                        <img class="gambarTownhall" src="./gambarTembok/gambar_hd_${wallMax-selisihKeWallMax}.jpg" alt="townhall">
+                        <img class="gambarTownhall" src="./icon/upgrade.webp" alt="townhall">
+                        <img class="gambarTownhall" src="./gambarTembok/gambar_hd_${wallMax}.jpg" alt="townhall">
+                    `
 
-                console.log("")
-                tambahkanKeterangan("<br>");
+                    tambahkanKeterangan(keteranganDenganGambar, 1)
+
+                    tambahkanKeterangan("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                    console.log("dengan total harga "+ hasilHarga.harga * ini.cnt);
+                    totalHarga += hasilHarga.harga * ini.cnt;
+    
+                    console.log("")
+                    tambahkanKeterangan("<br>");
+                }
 
             });
 
             return `
                 <div class="tampilkanHarga">
+                    <h1>Rp ${totalHarga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</h1>
                     <div class="keterangan">
+                        <h2>keterangan</h2>
                         ${keterangan}
                     </div>
-                    <h1>Rp ${totalHarga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</h1>
                 </div>
             `
         }
