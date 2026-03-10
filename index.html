@@ -15,23 +15,22 @@
             --text-muted: #64748b;
             --border: #e2e8f0;
         }
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
         }
 
         .wrapper {
-            max-width: 800px;
             width: 100%;
             background: var(--card-bg);
-            padding: 40px;
-            border-radius: 24px;
+            padding: 24px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
@@ -63,12 +62,14 @@
             flex-direction: column;
             gap: 15px;
             margin-bottom: 40px;
+
+            width: 100%;
         }
 
         .inputan {
             width: 100%;
             height: 150px;
-            padding: 15px;
+            padding: 8px;
             border-radius: 12px;
             border: 2px solid var(--border);
             font-family: monospace;
@@ -105,14 +106,17 @@
         /* Result Area */
         .tampilkanDataTembok {
             display: grid;
-            gap: 20px;
+            gap: 12px;
+
+            width: 100%;
         }
 
         .tembok {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
+            padding: 8px;
             background: #f8fafc;
             border-radius: 16px;
             border: 1px solid var(--border);
@@ -131,8 +135,7 @@
         }
 
         .gambar {
-            width: 60px;
-            height: 60px;
+            height: 42px;
             background: white;
             border-radius: 10px;
             padding: 5px;
@@ -152,6 +155,7 @@
 
         /* Price Section */
         .tampilkanHarga {
+            width: 100%;
             margin-top: 30px;
             padding: 25px;
             background: #eff6ff;
@@ -174,6 +178,10 @@
         }
 
         .keterangan {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
             text-align: left;
             margin-top: 20px;
             padding-top: 20px;
@@ -187,14 +195,17 @@
             margin-bottom: 4px;
         }
 
-        .keterangan div {
+        .keterangan .step-upgrade {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin: 10px 0;
+            flex-direction: column;
             background: white;
-            padding: 10px;
             border-radius: 8px;
+            .upgrades {
+                display: flex;
+                align-items: center;
+                border-radius: 8px;
+            }
         }
 
         .keterangan img {
@@ -215,7 +226,7 @@
         </div>
 
         <div class="tampilkanDataTembok">
-            </div>
+        </div>
     </div>
 
     <script>
@@ -233,6 +244,7 @@
             {"lvl": 16, "harga": 200}, {"lvl": 17, "harga": 300}, {"lvl": 18, "harga": 500},
             {"lvl": 19, "harga": 1000}
         ];
+
 
         async function tampilkanData(){
             const inputanDataJson = document.querySelector('.inputan');
@@ -301,10 +313,12 @@
                         totalHarga += subTotal;
                         
                         logUpgrade += `
+                        <div class="upgrades">
                             <img src="./gambarTembok/gambar_hd_${l-1}.jpg" onerror="this.src='https://via.placeholder.com/40'">
                             <span>➔</span>
                             <img src="./gambarTembok/gambar_hd_${l}.jpg" onerror="this.src='https://via.placeholder.com/40'">
                             <span style="font-size:11px"> (Lvl ${l}: Rp ${subTotal.toLocaleString('id-ID')})</span>
+                        </div>
                         `;
                     }
                     logUpgrade += `</div>`;
