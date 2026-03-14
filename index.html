@@ -8,13 +8,18 @@
     <style>
         :root {
             --primary: #2563eb;
+            --primary-light: #dbeafe;
             --accent: #f59e0b;
-            --bg: #f8fafc;
+            --bg: #f1f5f9;
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
+            --border-gelap: #1466d1;
+            --success: #059669;
+            --success-light: #ecfdf5;
         }
+
         * {
             padding: 0;
             margin: 0;
@@ -25,13 +30,17 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
         }
 
         .wrapper {
-            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
             background: var(--card-bg);
-            padding: 24px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
         }
 
         h1 {
@@ -41,40 +50,141 @@
             color: var(--primary);
             text-align: center;
             margin-bottom: 5px;
+            font-size: 1.8rem;
         }
 
         .subtitle {
             text-align: center;
             color: var(--text-muted);
             margin-bottom: 30px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
-        h2 {
-            font-size: 1.1rem;
+        /* Section List Harga */
+        .designHarga {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .designHarga h2 {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 15px;
             color: var(--text-main);
         }
 
-        /* Input Area */
+        .grid-harga {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+        }
+
+        .item-harga {
+            background: white;
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .item-harga:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            border-color: var(--primary-light);
+        }
+
+        .item-harga .atas {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .item-harga .temb {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-harga .temb img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .item-harga .panah {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .item-harga strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--success);
+            background: var(--success-light);
+            padding: 2px 8px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .item-harga .lvl-info {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        /* Section Masukan */
+        .info-input {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-input span {
+            font-size: 1.2rem;
+        }
+
+        .info-input a {
+            color: var(--primary);
+            font-weight: 800;
+            text-decoration: underline;
+        }
+
         .masukan {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 40px;
-
-            width: 100%;
+            margin-bottom: 25px;
         }
 
         .inputan {
             width: 100%;
-            height: 150px;
-            padding: 8px;
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            font-family: monospace;
-            font-size: 13px;
-            background: #f1f5f9;
+            height: 140px;
+            padding: 15px;
+            border-radius: 16px;
+            border: 2px solid var(--border-gelap);
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 12px;
+            background: #ffffff;
             transition: all 0.3s ease;
             resize: none;
         }
@@ -82,261 +192,254 @@
         .inputan:focus {
             outline: none;
             border-color: var(--primary);
-            background: white;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
         .tombol {
-            padding: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             background: var(--primary);
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
         }
 
         .tombol:hover {
             background: #1d4ed8;
             transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
         }
 
-        /* Result Area */
-        .tampilkanDataTembok {
-            display: grid;
-            gap: 12px;
-
-            width: 100%;
+        .tombolWa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            background: #22c55e;
+            color: white;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            font-weight: 800;
+            transition: background 0.2s;
         }
 
+        .tombolWa:hover {
+            background: #16a34a;
+        }
+
+        /* Results */
         .tembok {
-            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px;
-            background: #f8fafc;
+            padding: 15px;
+            background: white;
             border-radius: 16px;
             border: 1px solid var(--border);
-        }
-
-        .kiri, .kanan {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .kiri h1, .kanan h1 {
-            font-size: 1.2rem;
-            margin: 0;
-            color: var(--text-main);
+            margin-bottom: 12px;
         }
 
         .gambar {
-            height: 42px;
-            background: white;
-            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            background: var(--bg);
+            border-radius: 12px;
             padding: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .gambar img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .gambar img { width: 100%; height: 100%; object-fit: contain; }
+
+        .tampilkanHarga {
+            margin-top: 30px;
+            padding: 25px;
+            background: var(--success-light);
+            border-radius: 20px;
+            border: 2px solid var(--success);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .icon-upgrade {
-            width: 30px;
+        .tampilkanHarga::before {
+            content: "ESTIMASI BIAYA";
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--success);
+            letter-spacing: 2px;
             opacity: 0.5;
         }
 
-        /* Price Section */
-        .tampilkanHarga {
-            width: 100%;
-            margin-top: 30px;
-            padding: 25px;
-            background: #eff6ff;
-            border-radius: 20px;
-            border: 2px dashed var(--primary);
-            text-align: center;
-        }
+        .tampilkanHarga h1 { color: var(--success); font-size: 2.2rem; margin: 15px 0; }
+        
+        .keterangan { text-align: left; margin-top: 20px; border-top: 2px solid rgba(5, 150, 105, 0.1); padding-top: 20px; }
+        .step-upgrade { background: white; padding: 12px; border-radius: 14px; margin-top: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .upgrades { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+        .upgrades:last-child { border-bottom: none; }
+        .upgrades img { width: 32px; height: 32px; }
 
-        .tampilkanHarga h1 {
-            font-size: 2.5rem;
-            color: #047857; /* Green for Price */
-            margin: 15px 0;
-        }
-
-        .gambarTownhall {
-            width: 120px;
-            height: auto;
-            margin: 0 auto;
-            display: block;
-        }
-
-        .keterangan {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-
-            text-align: left;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(37, 99, 235, 0.1);
-        }
-
-        .keterangan span {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .keterangan .step-upgrade {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            background: white;
-            border-radius: 8px;
-            .upgrades {
-                display: flex;
-                align-items: center;
-                border-radius: 8px;
-            }
-        }
-
-        .keterangan img {
-            height: 40px !important;
-            width: auto !important;
+        @media (max-width: 480px) {
+            .wrapper { padding: 15px; }
+            .grid-harga { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
+
     <div class="wrapper">
         <h1>Joki Tembok CoC</h1>
-        <p class="subtitle">Kalkulasi biaya upgrade tembok otomatis via JSON</p>
+        <p class="subtitle">Update Otomatis • Aman • Profesional</p>
 
-        <h2>Tempel Data JSON Akun</h2>
+        <div class="designHarga" id="tabelHarga">
+            <p style="text-align:center; font-size: 0.8rem; color: var(--text-muted);">Memuat daftar harga...</p>
+        </div>
+
+        <div class="info-input">
+            <span>💡</span>
+            <p style="font-size: 0.85rem; line-height: 1.4;">
+                Bingung cara ambil datanya? <a href="https://youtube.com" target="_blank">Tonton Tutorial Singkat Ini</a> agar tidak salah <i>copy-paste</i>.
+            </p>
+        </div>
+
         <div class="masukan">
-            <textarea class="inputan" placeholder="Masukkan data json di sini..."></textarea>
-            <button class="tombol">HITUNG BIAYA SEKARANG</button>
+            <h1>paste json di sini...</h1>
+            <textarea class="inputan" placeholder='Tempel kode JSON di sini... (Contoh: {"buildings": [... ]})'></textarea>
+            <button class="tombol">Hitung Biaya Sekarang</button>
         </div>
 
-        <div class="tampilkanDataTembok">
-        </div>
+        <a target="_blank" href="https://wa.me/6285165418969" class="tombolWa">
+            <svg style="width:20px; fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.52.909 3.012 1.388 4.704 1.389 5.366 0 9.729-4.363 9.731-9.73 0-2.598-1.011-5.042-2.846-6.878-1.835-1.835-4.28-2.846-6.88-2.847-5.362 0-9.729 4.366-9.731 9.733-.001 1.808.513 3.52 1.484 4.965l-1.003 3.663 3.755-.984zm9.432-6.72c-.29-.144-1.714-.848-1.979-.944-.264-.096-.457-.144-.649.144-.191.288-.744.944-.911 1.136-.168.192-.336.216-.626.072-.29-.144-1.226-.452-2.335-1.441-.863-.77-1.445-1.72-1.614-2.008-.168-.288-.018-.444.127-.588.13-.13.29-.336.435-.504.145-.168.193-.288.29-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.56-.889-2.136-.234-.56-.472-.484-.649-.492-.168-.008-.36-.008-.553-.008s-.504.072-.768.36c-.264.288-1.008.984-1.008 2.399 0 1.416 1.031 2.784 1.175 2.976.145.192 2.031 3.1 4.92 4.346.687.296 1.224.474 1.641.607.69.219 1.319.188 1.815.114.553-.082 1.714-.7 1.954-1.376.24-.676.24-1.256.168-1.376-.072-.12-.264-.192-.553-.336z"/></svg>
+            ORDER VIA WHATSAPP
+        </a>
+
+        <div class="tampilkanDataTembok"></div>
     </div>
 
     <script>
-        const tombol = document.querySelector('.tombol');
-        
-        tombol.addEventListener('click', tampilkanData);
-
-        // Data harga fallback jika fetch gagal
-        const hargaDefault = [
+        let hargaGlobal = [
             {"lvl": 1, "harga": 100}, {"lvl": 2, "harga": 100}, {"lvl": 3, "harga": 100},
             {"lvl": 4, "harga": 100}, {"lvl": 5, "harga": 100}, {"lvl": 6, "harga": 100},
             {"lvl": 7, "harga": 100}, {"lvl": 8, "harga": 100}, {"lvl": 9, "harga": 100},
-            {"lvl": 10, "harga": 100}, {"lvl": 11, "harga": 100}, {"lvl": 12, "harga": 100},
-            {"lvl": 13, "harga": 100}, {"lvl": 14, "harga": 100}, {"lvl": 15, "harga": 150},
-            {"lvl": 16, "harga": 200}, {"lvl": 17, "harga": 300}, {"lvl": 18, "harga": 500},
-            {"lvl": 19, "harga": 1000}
+            {"lvl": 10, "harga": 200}, {"lvl": 11, "harga": 300}, {"lvl": 12, "harga": 500},
+            {"lvl": 13, "harga": 1000}, {"lvl": 14, "harga": 1500}, {"lvl": 15, "harga": 2000},
+            {"lvl": 16, "harga": 3000}, {"lvl": 17, "harga": 4000}, {"lvl": 18, "harga": 5000},
+            {"lvl": 19, "harga": 7000}
         ];
 
+        window.onload = () => { muatDaftarHarga("./harga.json"); };
 
-        async function tampilkanData(){
-            const inputanDataJson = document.querySelector('.inputan');
-            if(!inputanDataJson.value) return;
-
-            const dataJson = JSON.parse(inputanDataJson.value);
-            let townhall = 1;
-            let wallMax = 1;
-
-            // Cari level Townhall
-            const thData = dataJson.buildings.find(e => e.data == 1000001);
-            if(thData) {
-                townhall = thData.lvl;
-                wallMax = townhall > 10 ? townhall + 1 : townhall;
-            }
-
-            // Filter & Map data tembok
-            const dataTembokSekarang = dataJson.buildings
-                .filter(e => e.data == 1000010)
-                .map(e => ({ "lvl": e.lvl, "cnt": e.cnt }));
-
-            // Generate HTML untuk list tembok
-            const dataHtml = dataTembokSekarang.map(element => `
-                <div class="tembok">
-                    <div class="kiri">
-                        <div class="gambar">
-                            <img src="./gambarTembok/gambar_hd_${element.lvl}.jpg" onerror="this.src='https://via.placeholder.com/60?text=Wall+${element.lvl}'">
-                        </div>
-                        <h1>x ${element.cnt}</h1>
-                    </div>
-                    <img src="./icon/upgrade.webp" class="icon-upgrade" onerror="this.style.display='none'">
-                    <div class="kanan">
-                        <h1>Ke Level ${wallMax}</h1>
-                        <div class="gambar">
-                            <img src="./gambarTembok/gambar_hd_${wallMax}.jpg" onerror="this.src='https://via.placeholder.com/60?text=Max'">
-                        </div>
-                    </div>
-                </div>
-            `).join("");
-
-            let dataHarga = hargaDefault;
+        async function muatDaftarHarga(url) {
             try {
-                const response = await fetch("./harga.json");
-                if(response.ok) dataHarga = await response.json();
-            } catch (e) { console.log("Using default prices"); }
-
-            const hasilKalkulasi = hitungHarga(dataHarga, wallMax, dataTembokSekarang, townhall);
-            document.querySelector('.tampilkanDataTembok').innerHTML = dataHtml + hasilKalkulasi;
-        }
-
-        function hitungHarga(daftarHarga, wallMax, dataTembok, townhall){
-            let totalHarga = 0;
-            let keterangan = "";
-
-            dataTembok.forEach((ini, i) => {
-                keterangan += `<span><strong>Kelompok Tembok #${i+1} (${ini.cnt} unit)</strong></span>`;
-                let levelSkrg = parseInt(ini.lvl);
-                
-                if(levelSkrg >= wallMax) {
-                    keterangan += `<span>Sudah Level Max</span>`;
-                } else {
-                    let logUpgrade = `<div class="step-upgrade">`;
-                    for(let l = levelSkrg + 1; l <= wallMax; l++) {
-                        let dataH = daftarHarga.find(item => item.lvl === l) || {harga: 0};
-                        let subTotal = dataH.harga * ini.cnt;
-                        totalHarga += subTotal;
-                        
-                        logUpgrade += `
-                        <div class="upgrades">
-                            <img src="./gambarTembok/gambar_hd_${l-1}.jpg" onerror="this.src='https://via.placeholder.com/40'">
-                            <span>➔</span>
-                            <img src="./gambarTembok/gambar_hd_${l}.jpg" onerror="this.src='https://via.placeholder.com/40'">
-                            <span style="font-size:11px"> (Lvl ${l}: Rp ${subTotal.toLocaleString('id-ID')})</span>
-                        </div>
-                        `;
-                    }
-                    logUpgrade += `</div>`;
-                    keterangan += logUpgrade;
+                const res = await fetch(url);
+                if(res.ok) hargaGlobal = await res.json();
+            } catch (e) { console.log("Menggunakan harga default"); }
+            
+            const container = document.getElementById('tabelHarga');
+            let html = `<h2>Daftar Harga Upgrade</h2><div class="grid-harga">`;
+            hargaGlobal.forEach((item, i) => {
+                if(i < hargaGlobal.length - 1){
+                    html += `
+                        <div class="item-harga">
+                            <span class="lvl-info">Lvl ${item.lvl} ➔ ${hargaGlobal[i+1].lvl}</span>
+                            <div class="atas">
+                                <div class="temb"><img src="./gambarTembok/gambar_hd_${item.lvl}.jpg" onerror="this.src='https://via.placeholder.com/40?text=${item.lvl}'"></div>
+                                <div class="panah">→</div>
+                                <div class="temb"><img src="./gambarTembok/gambar_hd_${hargaGlobal[i+1].lvl}.jpg" onerror="this.src='https://via.placeholder.com/40?text=${hargaGlobal[i+1].lvl}'"></div>
+                            </div>
+                            <strong>Rp ${item.harga.toLocaleString('id-ID')}</strong>
+                        </div>`;
                 }
             });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
 
-            return `
-                <div class="tampilkanHarga">
-                    <img class="gambarTownhall" src="./gambarTownhall/gambar_hd_${townhall}.jpg" onerror="this.src='https://via.placeholder.com/120?text=TH+${townhall}'">
-                    <p style="margin-top:10px; color:var(--text-muted)">Estimasi Total Biaya Joki:</p>
-                    <h1>Rp ${totalHarga.toLocaleString('id-ID')}</h1>
-                    <div class="keterangan">
-                        <h2>Detail Pengerjaan</h2>
-                        ${keterangan}
+        const tombol = document.querySelector('.tombol');
+        tombol.addEventListener('click', tampilkanData);
+
+        async function tampilkanData(){
+            const inputField = document.querySelector('.inputan');
+            if(!inputField.value) return alert("Silakan paste data JSON terlebih dahulu!");
+
+            try {
+                const dataJson = JSON.parse(inputField.value);
+                const thData = dataJson.buildings.find(e => e.data == 1000001);
+                let townhall = thData ? thData.lvl : 1;
+                let wallMax = townhall > 10 ? townhall + 1 : townhall;
+
+                const dataTembokSekarang = dataJson.buildings
+                    .filter(e => e.data == 1000010)
+                    .map(e => ({ "lvl": e.lvl, "cnt": e.cnt }));
+
+                const listHtml = dataTembokSekarang.map(el => `
+                    <div class="tembok">
+                        <div class="kiri">
+                            <div class="gambar">
+                                <img src="./gambarTembok/gambar_hd_${el.lvl}.jpg" onerror="this.src='https://via.placeholder.com/50?text=W${el.lvl}'">
+                            </div>
+                            <div style="margin-left:10px">
+                                <p style="font-weight:800; font-size:1.1rem">x ${el.cnt}</p>
+                                <p style="font-size:0.7rem; color:var(--text-muted)">Jumlah Unit</p>
+                            </div>
+                        </div>
+                        <div class="panah" style="color:var(--primary); font-weight:900">➔</div>
+                        <div class="kanan">
+                            <div style="text-align:right; margin-right:10px">
+                                <p style="font-weight:800; font-size:1.1rem">Lvl ${wallMax}</p>
+                                <p style="font-size:0.7rem; color:var(--text-muted)">Target Max</p>
+                            </div>
+                            <div class="gambar">
+                                <img src="./gambarTembok/gambar_hd_${wallMax}.jpg" onerror="this.src='https://via.placeholder.com/50?text=Max'">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            `;
+                `).join("");
+
+                let totalHarga = 0;
+                let detailHtml = "";
+
+                dataTembokSekarang.forEach((kelompok, i) => {
+                    let lvlSkrg = parseInt(kelompok.lvl);
+                    detailHtml += `<p style="font-size:0.85rem; margin-top:15px; color:var(--text-main)"><b>Kelompok #${i+1} (${kelompok.cnt} Unit)</b></p>`;
+                    if(lvlSkrg >= wallMax) detailHtml += `<span style="font-size:0.8rem; color:gray;">Sudah level maksimum.</span>`;
+                    else {
+                        detailHtml += `<div class="step-upgrade">`;
+                        for(let l = lvlSkrg + 1; l <= wallMax; l++) {
+                            let priceData = hargaGlobal.find(item => item.lvl === l-1) || {harga: 0};
+                            let subTotal = priceData.harga * kelompok.cnt;
+                            totalHarga += subTotal;
+                            detailHtml += `
+                                <div class="upgrades">
+                                    <img src="./gambarTembok/gambar_hd_${l}.jpg" onerror="this.src='https://via.placeholder.com/30?text=${l}'">
+                                    <span style="font-size:0.8rem">Ke Lvl ${l}: <b>Rp ${subTotal.toLocaleString('id-ID')}</b></span>
+                                </div>`;
+                        }
+                        detailHtml += `</div>`;
+                    }
+                });
+
+                document.querySelector('.tampilkanDataTembok').innerHTML = listHtml + `
+                    <div class="tampilkanHarga">
+                        <img style="width:80px; margin-bottom:10px" src="./gambarTownhall/gambar_hd_${townhall}.jpg" onerror="this.src='https://via.placeholder.com/80?text=TH${townhall}'">
+                        <h1>Rp ${totalHarga.toLocaleString('id-ID')}</h1>
+                        <div class="keterangan">
+                            <h2 style="font-size:0.9rem; text-transform:uppercase; color:var(--success)">Rincian Pengerjaan</h2>
+                            ${detailHtml}
+                        </div>
+                    </div>
+                `;
+
+            } catch (err) { alert("Format JSON tidak valid!"); }
         }
     </script>
 </body>
