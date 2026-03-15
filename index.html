@@ -18,6 +18,7 @@
             --border-gelap: #1466d1;
             --success: #059669;
             --success-light: #ecfdf5;
+            --danger: #e11d48;
         }
 
         * {
@@ -89,16 +90,7 @@
             padding: 12px;
             border-radius: 14px;
             border: 1px solid var(--border);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .item-harga:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            border-color: var(--primary-light);
+            text-align: center;
         }
 
         .item-harga .atas {
@@ -107,27 +99,11 @@
             justify-content: center;
             gap: 8px;
             margin-bottom: 10px;
-            width: 100%;
-        }
-
-        .item-harga .temb {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .item-harga .temb img {
-            width: 100%;
+            width: 35px;
             height: auto;
-            object-fit: contain;
-        }
-
-        .item-harga .panah {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1rem;
         }
 
         .item-harga strong {
@@ -137,8 +113,6 @@
             background: var(--success-light);
             padding: 2px 8px;
             border-radius: 20px;
-            width: 100%;
-            text-align: center;
         }
 
         .item-harga .lvl-info {
@@ -159,10 +133,6 @@
             gap: 12px;
         }
 
-        .info-input span {
-            font-size: 1.2rem;
-        }
-
         .info-input a {
             color: var(--primary);
             font-weight: 800;
@@ -172,30 +142,66 @@
         .masukan {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 25px;
         }
 
         .inputan {
             width: 100%;
-            height: 140px;
+            height: 120px;
             padding: 15px;
             border-radius: 16px;
             border: 2px solid var(--border-gelap);
-            font-family: 'Monaco', 'Consolas', monospace;
+            font-family: 'Monaco', monospace;
             font-size: 12px;
-            background: #ffffff;
-            transition: all 0.3s ease;
             resize: none;
         }
 
-        .inputan:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        /* Section Diskon */
+        .section-diskon {
+            background: #fff7ed;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #ffedd5;
+            margin-bottom: 20px;
+        }
+
+        .diskon-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-group input {
+            width: 20px;
+            height: 20px;
+        }
+
+        .input-diskon-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-custom {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #fed7aa;
+            width: 100%;
         }
 
         .tombol {
+            width: 100%;
             padding: 16px;
             border: none;
             border-radius: 14px;
@@ -203,16 +209,8 @@
             color: white;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
-        }
-
-        .tombol:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+            margin-bottom: 15px;
         }
 
         .tombolWa {
@@ -227,11 +225,6 @@
             border-radius: 14px;
             margin-bottom: 30px;
             font-weight: 800;
-            transition: background 0.2s;
-        }
-
-        .tombolWa:hover {
-            background: #16a34a;
         }
 
         /* Results */
@@ -263,34 +256,26 @@
             border-radius: 20px;
             border: 2px solid var(--success);
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .tampilkanHarga::before {
-            content: "ESTIMASI BIAYA";
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.65rem;
-            font-weight: 800;
-            color: var(--success);
-            letter-spacing: 2px;
-            opacity: 0.5;
+        .harga-asli {
+            text-decoration: line-through;
+            color: var(--danger);
+            font-size: 1.1rem;
+            opacity: 0.7;
         }
 
-        .tampilkanHarga h1 { color: var(--success); font-size: 2.2rem; margin: 15px 0; }
+        .tampilkanHarga h1 { color: var(--success); font-size: 2.5rem; margin: 5px 0; }
         
         .keterangan { text-align: left; margin-top: 20px; border-top: 2px solid rgba(5, 150, 105, 0.1); padding-top: 20px; }
         .step-upgrade { background: white; padding: 12px; border-radius: 14px; margin-top: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .upgrades { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+        .upgrades { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px solid #f1f5f9; }
         .upgrades:last-child { border-bottom: none; }
         .upgrades img { width: 32px; height: 32px; }
 
         @media (max-width: 480px) {
-            .wrapper { padding: 15px; }
             .grid-harga { grid-template-columns: repeat(2, 1fr); }
+            .diskon-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -307,15 +292,29 @@
         <div class="info-input">
             <span>💡</span>
             <p style="font-size: 0.85rem; line-height: 1.4;">
-                Bingung cara ambil datanya? <a href="https://youtube.com" target="_blank">Tonton Tutorial Singkat Ini</a> agar tidak salah <i>copy-paste</i>.
+                Bingung cara ambil datanya? <a href="https://youtube.com" target="_blank">Tonton Tutorial Singkat Ini</a>.
             </p>
         </div>
 
         <div class="masukan">
-            <h1>paste json di sini...</h1>
-            <textarea class="inputan" placeholder='Tempel kode JSON di sini... (Contoh: {"buildings": [... ]})'></textarea>
-            <button class="tombol">Hitung Biaya Sekarang</button>
+            <h3 style="font-size: 1rem; color: var(--text-main);">Paste JSON di sini...</h3>
+            <textarea class="inputan" placeholder='Tempel kode JSON di sini...'></textarea>
         </div>
+
+        <div class="section-diskon">
+            <div class="diskon-grid">
+                <label class="checkbox-group">
+                    <input type="checkbox" id="royalPass">
+                    <span>Royal Pass (Diskon 20%)</span>
+                </label>
+                <div class="input-diskon-group">
+                    <label style="font-size: 0.7rem; font-weight: 800; color: var(--accent);">DISKON TAMBAHAN (%)</label>
+                    <input type="number" id="customDiskon" class="input-custom" placeholder="0" min="0" max="100">
+                </div>
+            </div>
+        </div>
+
+        <button class="tombol">Hitung Biaya Sekarang</button>
 
         <a target="_blank" href="https://wa.me/6285165418969" class="tombolWa">
             <svg style="width:20px; fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.52.909 3.012 1.388 4.704 1.389 5.366 0 9.729-4.363 9.731-9.73 0-2.598-1.011-5.042-2.846-6.878-1.835-1.835-4.28-2.846-6.88-2.847-5.362 0-9.729 4.366-9.731 9.733-.001 1.808.513 3.52 1.484 4.965l-1.003 3.663 3.755-.984zm9.432-6.72c-.29-.144-1.714-.848-1.979-.944-.264-.096-.457-.144-.649.144-.191.288-.744.944-.911 1.136-.168.192-.336.216-.626.072-.29-.144-1.226-.452-2.335-1.441-.863-.77-1.445-1.72-1.614-2.008-.168-.288-.018-.444.127-.588.13-.13.29-.336.435-.504.145-.168.193-.288.29-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.56-.889-2.136-.234-.56-.472-.484-.649-.492-.168-.008-.36-.008-.553-.008s-.504.072-.768.36c-.264.288-1.008.984-1.008 2.399 0 1.416 1.031 2.784 1.175 2.976.145.192 2.031 3.1 4.92 4.346.687.296 1.224.474 1.641.607.69.219 1.319.188 1.815.114.553-.082 1.714-.7 1.954-1.376.24-.676.24-1.256.168-1.376-.072-.12-.264-.192-.553-.336z"/></svg>
@@ -342,7 +341,7 @@
             try {
                 const res = await fetch(url);
                 if(res.ok) hargaGlobal = await res.json();
-            } catch (e) { console.log("Menggunakan harga default"); }
+            } catch (e) { console.log("Gagal muat JSON harga, gunakan default"); }
             
             const container = document.getElementById('tabelHarga');
             let html = `<h2>Daftar Harga Upgrade</h2><div class="grid-harga">`;
@@ -428,10 +427,27 @@
                     }
                 });
 
-                document.querySelector('.tampilkanDataTembok').innerHTML = listHtml + `
+                // Perhitungan Diskon
+                let diskonPersen = 0;
+                if(document.getElementById('royalPass').checked) diskonPersen += 20;
+                let custom = parseFloat(document.getElementById('customDiskon').value) || 0;
+                diskonPersen += custom;
+
+                let potongan = totalHarga * (diskonPersen / 100);
+                let totalAkhir = totalHarga - potongan;
+
+                const rincianHargaHtml = `
                     <div class="tampilkanHarga">
                         <img style="width:80px; margin-bottom:10px" src="./gambarTownhall/gambar_hd_${townhall}.jpg" onerror="this.src='https://via.placeholder.com/80?text=TH${townhall}'">
-                        <h1>Rp ${totalHarga.toLocaleString('id-ID')}</h1>
+                        
+                        ${diskonPersen > 0 ? `<p class="harga-asli">Rp ${totalHarga.toLocaleString('id-ID')}</p>` : ''}
+                        
+                        <p style="font-size:0.8rem; font-weight: 800; color: var(--text-muted)">
+                            TOTAL BIAYA ${diskonPersen > 0 ? `(DISKON ${diskonPersen}%)` : ''}
+                        </p>
+                        
+                        <h1>Rp ${totalAkhir.toLocaleString('id-ID')}</h1>
+                        
                         <div class="keterangan">
                             <h2 style="font-size:0.9rem; text-transform:uppercase; color:var(--success)">Rincian Pengerjaan</h2>
                             ${detailHtml}
@@ -439,7 +455,11 @@
                     </div>
                 `;
 
-            } catch (err) { alert("Format JSON tidak valid!"); }
+                document.querySelector('.tampilkanDataTembok').innerHTML = listHtml + rincianHargaHtml;
+
+            } catch (err) { 
+                alert("Format JSON tidak valid! Pastikan Anda menyalin seluruh isi file JSON."); 
+            }
         }
     </script>
 </body>
