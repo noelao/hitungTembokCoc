@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Layanan Joki CoC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .card { background-color: #1e293b; border: 1px solid #334155; }
+    </style>
+</head>
+<body class="p-4 md:p-10 font-sans">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-400 mb-2">SOP LAYANAN JOKI CLASH OF CLANS</h1>
+            <p class="text-slate-400 italic">Standar Operasional Prosedur untuk Keamanan dan Kelancaran Akun</p>
+        </header>
+
+        <section class="card rounded-xl p-6 mb-6 shadow-lg">
+            <h2 class="text-xl font-bold text-yellow-500 mb-4 flex items-center">
+                <span class="mr-2">🚀</span> BAGIAN 1: PROSEDUR UMUM
+            </h2>
+            <ul class="list-disc ml-5 space-y-2 text-slate-300">
+                <li><strong>Pembersihan Sesi:</strong> Client wajib <em>Force Close</em> aplikasi CoC dan tidak membukanya hingga instruksi "Selesai".</li>
+                <li><strong>Jeda Keamanan (Cooldown):</strong> Joki akan login minimal <strong>2 jam</strong> setelah konfirmasi Log Out untuk menyamarkan IP.</li>
+                <li><strong>Dokumentasi:</strong> Joki mengirimkan screenshot profil & resource awal sebagai bukti validitas data.</li>
+            </ul>
+        </section>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <section class="card rounded-xl p-6 border-l-4 border-l-green-500">
+                <h2 class="text-lg font-bold text-green-400 mb-4 uppercase text-center">Skenario A: Proteksi Aktif</h2>
+                <ul class="list-decimal ml-5 space-y-3 text-sm text-slate-300">
+                    <li>Client wajib <strong>standby</strong> untuk memberikan Kode SMS/Email saat login awal.</li>
+                    <li>Joki dilarang <em>log out</em>/hapus data agar tidak perlu minta kode berulang kali.</li>
+                    <li>Jika <strong>Account Locked</strong>, Client wajib memberikan <em>Recovery Code</em>.</li>
+                    <li class="text-red-400 font-semibold italic text-xs">Risiko: Akun hangus jika Recovery Code hilang/lupa.</li>
+                </ul>
+            </section>
+
+            <section class="card rounded-xl p-6 border-l-4 border-l-red-500">
+                <h2 class="text-lg font-bold text-red-400 mb-4 uppercase text-center">Skenario B: Proteksi Nonaktif</h2>
+                <ul class="list-decimal ml-5 space-y-3 text-sm text-slate-300">
+                    <li>Client memberikan kode verifikasi Supercell ID via email.</li>
+                    <li>Joki dilarang keras mengaktifkan Proteksi Akun (PA) dengan nomor pribadi.</li>
+                    <li><strong>Pasca-Joki:</strong> Client wajib segera mengaktifkan kembali PA dan ganti password email.</li>
+                    <li class="text-yellow-400 font-semibold italic text-xs">Saran: Segera aktifkan PA setelah serah terima kembali.</li>
+                </ul>
+            </section>
+        </div>
+
+        <section class="card rounded-xl p-6 mt-6 overflow-x-auto">
+            <h2 class="text-xl font-bold text-blue-400 mb-4">Perbandingan Risiko</h2>
+            <table class="w-full text-left text-sm border-collapse">
+                <thead>
+                    <tr class="border-b border-slate-700">
+                        <th class="py-2 px-4">Fitur</th>
+                        <th class="py-2 px-4">PA AKTIF</th>
+                        <th class="py-2 px-4">PA NONAKTIF</th>
+                    </tr>
+                </thead>
+                <tbody class="text-slate-400">
+                    <tr class="border-b border-slate-800">
+                        <td class="py-2 px-4 font-semibold">Keamanan</td>
+                        <td class="py-2 px-4 text-green-400 text-xs">Sangat Tinggi</td>
+                        <td class="py-2 px-4 text-red-400 text-xs">Rendah</td>
+                    </tr>
+                    <tr class="border-b border-slate-800">
+                        <td class="py-2 px-4 font-semibold">Kelancaran</td>
+                        <td class="py-2 px-4 text-xs text-yellow-400">Terhambat (Butuh Koordinasi)</td>
+                        <td class="py-2 px-4 text-xs text-green-400">Sangat Lancar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer class="mt-10 p-4 border-t border-slate-800 text-center">
+            <p class="text-xs text-slate-500 uppercase tracking-widest">
+                Pelanggaran ToS Supercell menjadi tanggung jawab masing-masing pihak.
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>

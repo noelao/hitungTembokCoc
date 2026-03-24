@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joki Tembok CoC - Kalkulator Profesional</title>
+    <title>Kalkulator Joki Tembok CoC</title>
+    <link rel="icon" href="./logo.svg" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -32,14 +33,13 @@
             background-color: var(--bg);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 20px;
         }
 
         .wrapper {
             max-width: 650px;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 30px;
+            padding: 15px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             border-radius: 24px;
         }
@@ -64,7 +64,7 @@
         /* Section List Harga */
         .designHarga {
             background: #f8fafc;
-            padding: 20px;
+            padding: 8px;
             border-radius: 18px;
             margin-bottom: 30px;
             border: 1px solid var(--border);
@@ -82,12 +82,12 @@
         .grid-harga {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 12px;
+            gap: 6px;
         }
 
         .item-harga {
             background: white;
-            padding: 12px;
+            padding: 6px;
             border-radius: 14px;
             border: 1px solid var(--border);
             text-align: center;
@@ -282,8 +282,8 @@
 <body>
 
     <div class="wrapper">
-        <h1>Joki Tembok CoC</h1>
-        <p class="subtitle">Update Otomatis • Aman • Profesional</p>
+        <h1>Kalkulator Joki Tembok</h1>
+        <p class="subtitle">Suport pengembang</p>
 
         <div class="designHarga" id="tabelHarga">
             <p style="text-align:center; font-size: 0.8rem; color: var(--text-muted);">Memuat daftar harga...</p>
@@ -298,7 +298,8 @@
 
         <div class="masukan">
             <h3 style="font-size: 1rem; color: var(--text-main);">Paste JSON di sini...</h3>
-            <textarea class="inputan" placeholder='Tempel kode JSON di sini...'></textarea>
+            <textarea class="inputan" placeholder='Tempel kode JSON di sini...'>
+            </textarea>
         </div>
 
         <div class="section-diskon">
@@ -318,7 +319,7 @@
 
         <a target="_blank" href="https://wa.me/6285165418969" class="tombolWa">
             <svg style="width:20px; fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.52.909 3.012 1.388 4.704 1.389 5.366 0 9.729-4.363 9.731-9.73 0-2.598-1.011-5.042-2.846-6.878-1.835-1.835-4.28-2.846-6.88-2.847-5.362 0-9.729 4.366-9.731 9.733-.001 1.808.513 3.52 1.484 4.965l-1.003 3.663 3.755-.984zm9.432-6.72c-.29-.144-1.714-.848-1.979-.944-.264-.096-.457-.144-.649.144-.191.288-.744.944-.911 1.136-.168.192-.336.216-.626.072-.29-.144-1.226-.452-2.335-1.441-.863-.77-1.445-1.72-1.614-2.008-.168-.288-.018-.444.127-.588.13-.13.29-.336.435-.504.145-.168.193-.288.29-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.56-.889-2.136-.234-.56-.472-.484-.649-.492-.168-.008-.36-.008-.553-.008s-.504.072-.768.36c-.264.288-1.008.984-1.008 2.399 0 1.416 1.031 2.784 1.175 2.976.145.192 2.031 3.1 4.92 4.346.687.296 1.224.474 1.641.607.69.219 1.319.188 1.815.114.553-.082 1.714-.7 1.954-1.376.24-.676.24-1.256.168-1.376-.072-.12-.264-.192-.553-.336z"/></svg>
-            ORDER VIA WHATSAPP
+            WHATSAPP
         </a>
 
         <div class="tampilkanDataTembok"></div>
@@ -326,21 +327,46 @@
 
     <script>
         let hargaGlobal = [
-            {"lvl": 1, "harga": 100}, {"lvl": 2, "harga": 100}, {"lvl": 3, "harga": 100},
-            {"lvl": 4, "harga": 100}, {"lvl": 5, "harga": 100}, {"lvl": 6, "harga": 100},
-            {"lvl": 7, "harga": 100}, {"lvl": 8, "harga": 100}, {"lvl": 9, "harga": 100},
-            {"lvl": 10, "harga": 200}, {"lvl": 11, "harga": 300}, {"lvl": 12, "harga": 500},
-            {"lvl": 13, "harga": 1000}, {"lvl": 14, "harga": 1500}, {"lvl": 15, "harga": 2000},
-            {"lvl": 16, "harga": 3000}, {"lvl": 17, "harga": 4000}, {"lvl": 18, "harga": 5000},
-            {"lvl": 19, "harga": 7000}
-        ];
+                {"lvl": 1, "harga": 1},
+                {"lvl": 2, "harga": 2},
+                {"lvl": 3, "harga": 10},
+                {"lvl": 4, "harga": 10},
+                {"lvl": 5, "harga": 10},
+                {"lvl": 6, "harga": 50},
+                {"lvl": 7, "harga": 50},
+                {"lvl": 8, "harga": 50},
+                {"lvl": 9, "harga": 50},
+                {"lvl": 10, "harga": 50},
+                {"lvl": 11, "harga": 50},
+                {"lvl": 12, "harga": 100},
+                {"lvl": 13, "harga": 200},
+                {"lvl": 14, "harga": 300},
+                {"lvl": 15, "harga": 400},
+                {"lvl": 16, "harga": 500},
+                {"lvl": 17, "harga": 700},
+                {"lvl": 18, "harga": 1000},
+                {"lvl": 19, "harga": 2000}
+            ];
+        let biayaEliksir = [];
 
-        window.onload = () => { muatDaftarHarga("./harga.json"); };
+        window.onload = () => { muatDaftarHarga("./biaya.json"); };
+
 
         async function muatDaftarHarga(url) {
             try {
                 const res = await fetch(url);
-                if(res.ok) hargaGlobal = await res.json();
+                if(res.ok){
+                    biayaEliksir = await res.json();
+                    biayaEliksir.forEach((item, i) => {
+                        if(i == 0){
+
+                        } else {
+                            hargaGlobal[i-1].harga = item.biaya/10000;
+                        }
+                    });
+                } 
+
+
             } catch (e) { console.log("Gagal muat JSON harga, gunakan default"); }
             
             const container = document.getElementById('tabelHarga');
@@ -365,6 +391,7 @@
 
         const tombol = document.querySelector('.tombol');
         tombol.addEventListener('click', tampilkanData);
+
 
         async function tampilkanData(){
             const inputField = document.querySelector('.inputan');
@@ -405,6 +432,7 @@
                 `).join("");
 
                 let totalHarga = 0;
+                let totalEliksir = 0;
                 let detailHtml = "";
 
                 dataTembokSekarang.forEach((kelompok, i) => {
@@ -417,10 +445,21 @@
                             let priceData = hargaGlobal.find(item => item.lvl === l-1) || {harga: 0};
                             let subTotal = priceData.harga * kelompok.cnt;
                             totalHarga += subTotal;
+
+                            console.log(biayaEliksir[l-1]);
+
+                            let subEliksir = biayaEliksir[l-1].biaya * kelompok.cnt;
+                            totalEliksir += subEliksir;
+
                             detailHtml += `
                                 <div class="upgrades">
+                                    <img src="./gambarTembok/gambar_hd_${l-1}.jpg" onerror="this.src='https://via.placeholder.com/30?text=${l}'">
+                                    <div class="panah" style="color:var(--primary); font-weight:900">➔</div>
                                     <img src="./gambarTembok/gambar_hd_${l}.jpg" onerror="this.src='https://via.placeholder.com/30?text=${l}'">
                                     <span style="font-size:0.8rem">Ke Lvl ${l}: <b>Rp ${subTotal.toLocaleString('id-ID')}</b></span>
+                                    <span style="font-size:0.8rem">
+                                    <img src="./icon/eliksir.png" onerror="this.src='https://via.placeholder.com/30?text=${l}'">
+                                     ${subEliksir.toLocaleString('id-ID')}</b></span>
                                 </div>`;
                         }
                         detailHtml += `</div>`;
