@@ -55,7 +55,9 @@
         
         .designHarga { background: #f8fafc; padding: 10px; border-radius: 18px; margin-bottom: 30px; border: 1px solid var(--border); }
         .designHarga h2 { text-align: center; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--text-main); }
-        .grid-harga { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; }
+        .grid-harga { display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 6px; }
         
         .item-harga { background: white; padding: 8px; border-radius: 14px; border: 1px solid var(--border); text-align: center; }
         .item-harga .atas { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
@@ -92,7 +94,10 @@
         .upgrades:last-child { border-bottom: none; }
         .upgrades img { width: 32px; height: 32px; }
 
-        @media (max-width: 480px) { .grid-harga { grid-template-columns: repeat(2, 1fr); } .diskon-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) { 
+            /* .grid-harga { grid-template-columns: repeat(2, 1fr); }  */
+            .diskon-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -102,8 +107,8 @@
             <button class="btn-mode" id="toggleMode">🌙 Mode Gelap</button>
         </div>
 
-        <h1>Kalkulator Joki Tembok</h1>
-        <p class="subtitle">Support pengembang</p>
+        <h1 style="line-height: 1.2;">Kalkulator Joki Tembok</h1>
+        <p class="subtitle">Icikiwir</p>
 
         <div class="designHarga" id="tabelHarga">
             <p style="text-align:center; font-size: 0.8rem; color: var(--text-muted);">Memuat daftar harga...</p>
